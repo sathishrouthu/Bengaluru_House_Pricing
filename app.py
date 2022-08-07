@@ -43,7 +43,7 @@ def load_saved_artifats():
 @app.route('/get_location_names')
 def get_location_names():
     response = jsonify({
-        'locations':get_locations_for_ui()
+        'locations':['raja nagar','s']
     })
     response.headers.add("Access-Control-Allow-Origin",'*')
     return response
