@@ -13,10 +13,10 @@ Front end is built by using HTML, CSS, JavaScript & JQuery.
 
 **Flask API End Point**            :   <a href = "https://bengaluru-house-prices.herokuapp.com/predict_home_price"> https://bengaluru-house-prices.herokuapp.com/predict_home_price </a>
 
-It accepts a POST Request with 4 input values : total_sqft , bhk, bath, location
-
-It returns a response in json format 
 ```
+It accepts a POST Request with 4 input values : total_sqft , bhk, bath, location
+It returns a response in json format 
+
 {
   estimated_price : 93.5;
 }
