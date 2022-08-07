@@ -25,7 +25,7 @@ def get_estimated_price(location,sqft,bhk,bath):
 
 
 def get_locations_for_ui():
-    return __locations
+    return __data_columns[3:]
 
 def load_saved_artifats():
     print("Loading... saved artifacts.....")
@@ -39,11 +39,14 @@ def load_saved_artifats():
         __model = pickle.load(f)
     print("Loaded Artifacts done...")
 
-
+@app.route('/')
+def home():
+    global __data_columns
+    return " ".join(__data_columns)
 @app.route('/get_location_names')
 def get_location_names():
     response = jsonify({
-        'locations':['raja nagar','s']
+        'locations':get_locations_for_ui()
     })
     response.headers.add("Access-Control-Allow-Origin",'*')
     return response
