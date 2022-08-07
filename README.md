@@ -21,6 +21,7 @@ It returns a response in json format
 }
 ```
 
+![demo2](https://user-images.githubusercontent.com/93826731/183306802-2b291f50-123f-4a10-9d9c-53eef06becb1.gif)
 
  
 
