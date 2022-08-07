@@ -1,4 +1,4 @@
-from flask import Flask,redirect,jsonify,request
+from flask import Flask,redirect,jsonify,request,render_template
 import pickle
 import json
 import numpy as np
@@ -25,7 +25,6 @@ def get_estimated_price(location,sqft,bhk,bath):
 
 
 def get_locations_for_ui():
-    global __locations
     return __locations
 
 def load_saved_artifats():
@@ -33,16 +32,14 @@ def load_saved_artifats():
     global __data_columns
     global __locations
     global __model
-    with open("columns.json","r") as f:
-        __data_columns = json.load(f)["data_columns"]
+    with open("./artifacts/data_columns.pkl","rb") as f:
+        __data_columns = pickle.load(f)["data_columns"]
         __locations = __data_columns[3:]
-    with open("LR_Model.pkl","rb") as f:
+    with open("./artifacts/LR_model.pkl","rb") as f:
         __model = pickle.load(f)
     print("Loaded Artifacts done...")
 
-@app.route('/')
-def home():
-    return """<a href= 'https://bengaluru-house-prices.herokuapp.com/get_location_names'> get locations </a>"""
+
 @app.route('/get_location_names')
 def get_location_names():
     response = jsonify({
@@ -50,6 +47,7 @@ def get_location_names():
     })
     response.headers.add("Access-Control-Allow-Origin",'*')
     return response
+
 @app.route('/predict_home_price',methods=["GET","POST"])
 def predict_home_price():
     total_sqft = float(request.form['total_sqft'])
@@ -65,4 +63,5 @@ def predict_home_price():
 if __name__=="__main__":
     load_saved_artifats()
     print("Starting Flask server....")
-    app.run()
+    app.run(debug=True)
+    
