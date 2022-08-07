@@ -5,7 +5,7 @@ import numpy as np
 
 __data_columns = pickle.load(open("./artifacts/data_columns.pkl","rb"))["data_columns"]
 __locations = __data_columns[3:]
-__model = pickle.load(open("./artifacts/LR_model.pkl","rb"))
+__model = pickle.load(open("./artifacts/LR_Model.pkl","rb"))
 
 app = Flask(__name__)
 
