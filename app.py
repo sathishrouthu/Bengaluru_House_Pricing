@@ -25,7 +25,8 @@ def get_estimated_price(location,sqft,bhk,bath):
 
 
 def get_locations_for_ui():
-    return __data_columns[3:]
+    global __locations
+    return __locations
 
 def load_saved_artifats():
     print("Loading... saved artifacts.....")
@@ -41,8 +42,7 @@ def load_saved_artifats():
 
 @app.route('/')
 def home():
-    global __data_columns
-    return " ".join(__data_columns)
+    return """<a href= 'https://bengaluru-house-prices.herokuapp.com/get_location_names'> get locations </a>"""
 @app.route('/get_location_names')
 def get_location_names():
     response = jsonify({
