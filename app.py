@@ -1,6 +1,4 @@
-from pydoc import render_doc
-from urllib import response
-from flask import Flask,redirect,jsonify,request,render_template
+from flask import Flask,redirect,jsonify,request
 import pickle
 import json
 import numpy as np
@@ -34,10 +32,10 @@ def load_saved_artifats():
     global __data_columns
     global __locations
     global __model
-    with open("./artifacts/columns.json","r") as f:
+    with open("columns.json","r") as f:
         __data_columns = json.load(f)["data_columns"]
         __locations = __data_columns[3:]
-    with open("./artifacts/LR_model.pkl","rb") as f:
+    with open("LR_Model.pkl","rb") as f:
         __model = pickle.load(f)
     print("Loaded Artifacts done...")
 
@@ -64,4 +62,4 @@ def predict_home_price():
 if __name__=="__main__":
     load_saved_artifats()
     print("Starting Flask server....")
-    app.run(debug=True)
+    app.run()
