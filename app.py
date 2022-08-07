@@ -3,9 +3,13 @@ import pickle
 import json
 import numpy as np
 
-__data_columns = pickle.load(open("./artifacts/data_columns.pkl","rb"))["data_columns"]
+print("Loading... saved artifacts.....")
+
+__data_columns = pickle.load(open("./models/data_columns.pkl","rb"))["data_columns"]
 __locations = __data_columns[3:]
-__model = pickle.load(open("./artifacts/LR_Model.pkl","rb"))
+__model = pickle.load(open("./models/LR_Model.pkl","rb"))
+
+print("Loaded Artifacts done...")
 
 app = Flask(__name__)
 
@@ -23,15 +27,9 @@ def get_estimated_price(location,sqft,bhk,bath):
         x[loc_index] = 1
     return round(__model.predict([x])[0],2)
 
-
-# def get_locations_for_ui():
-#     global __locations
-#     return __locations
-
-# def load_saved_artifats():
-#     print("Loading... saved artifacts.....")
-#     print("Loaded Artifacts done...")
-
+@app.route('/')
+def home():
+    return """ <center><h1> Bengaluru House Price Prediction </h1></center> """
 
 @app.route('/get_location_names')
 def get_location_names():
@@ -55,7 +53,6 @@ def predict_home_price():
     return response
 
 if __name__=="__main__":
-    # load_saved_artifats()
     print("Starting Flask server....")
-    app.run(debug=True)
+    app.run()
     
